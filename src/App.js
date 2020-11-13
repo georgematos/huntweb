@@ -1,15 +1,10 @@
-import { Component } from "react";
+import Header from './components/Header';
+import './styles.css'
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <header>
-          <h1>Learn React: Hello World</h1>
-        </header>
-      </div>
-    );
-  }
-}
+const App = () => (
+  <div>
+    <Header />
+  </div>
+);
 
 export default App;
