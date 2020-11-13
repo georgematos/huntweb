@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
+ReactDOM.render( // used only one time in all application to render your main component
   <React.StrictMode>
-    <App />
+    <App /> {/* main component */}
   </React.StrictMode>,
   document.getElementById('root')
 );
