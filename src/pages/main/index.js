@@ -6,27 +6,45 @@ import './styles.css';
 class Main extends Component {
 
   state = {
-    products: []
+    products: [],
+    productsMetaData: {},
+    page: 1
   }
 
   async componentDidMount() {
-    const products = await this.loadProducts();
+    this.loadProducts();
+  }
+
+  loadProducts = async (page = 1) => {
+    const products = await api.get(`/products?page=${page}`);
+    const { docs, ...productsMetaData } = products.data;
 
     this.setState({
-      products
+      products: docs,
+      productsMetaData,
+      page
     })
   }
 
-  loadProducts = async () => {
-    const response = await api.get('/products');
-    return response.data.docs;
+  prevPage = () => {
+    const { page } = this.state;
+    if (page > 1) {
+      this.loadProducts(page - 1)
+    }
+  }
+
+  nextPage = () => {
+    const { page, productsMetaData } = this.state;
+    if (page < productsMetaData.pages) {
+      this.loadProducts(page + 1)
+    }
   }
 
   render() {
     /* desestruturacao - declara um ou mais atributos e atribui
     a ele/s o valor do atributo de mesmo nome do objeto declarado
     a direita. */
-    const { products } = this.state;
+    const { products, productsMetaData, page } = this.state;
 
     return (
       <div className="product-list">
@@ -38,6 +56,10 @@ class Main extends Component {
             <a href={product.url}>Acessar</a>
           </article>
         ))}
+        <div className="actions">
+          <button disabled={page === 1} onClick={this.prevPage}>Anterior</button>
+          <button disabled={page === productsMetaData.pages} onClick={this.nextPage}>Próxima</button>
+        </div>
       </div>
     )
   }
