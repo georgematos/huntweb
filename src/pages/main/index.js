@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import './styles.css';
 
@@ -53,7 +54,7 @@ class Main extends Component {
             <strong>{product.title}</strong>
             <p>{product.description}</p>
 
-            <a href={product.url}>Acessar</a>
+            <Link to={`/product/${product._id}`}>Acessar</Link>
           </article>
         ))}
         <div className="actions">
