@@ -54,7 +54,12 @@ class Main extends Component {
             <strong>{product.title}</strong>
             <p>{product.description}</p>
 
-            <Link to={`/product/${product._id}`}>Acessar</Link>
+            <Link
+              to={{
+                pathname: `/product/${product._id}`,
+                productProps: product
+              }}
+            >Acessar</Link>
           </article>
         ))}
         <div className="actions">
