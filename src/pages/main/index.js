@@ -17,7 +17,7 @@ class Main extends Component {
   }
 
   loadProducts = async (page = 1) => {
-    const products = await api.get(`/products?page=${page}`);
+    const products = await api.get(`/products?page=${page}&limit=4`);
     const { docs, ...productsMetaData } = products.data;
 
     this.setState({
